@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClinicCare+ - Pharmacist Dashboard</title>
+  <link rel="stylesheet" href="/CSS/pharmacist.css" />
+</head>
+<body>
+  <aside>
+    <h2>Pharmacist Panel</h2>
+    <nav>
+      <a href="#" onclick="showSection('medicines')">Medicine Stock</a>
+      <a href="#" onclick="showSection('prescriptions')">Patient Prescriptions</a>
+      <!-- User Icon Dropdown -->
+      <div class="user-menu" style="position:relative;display:inline-block;">
+        <button id="userIconBtn" style="background:none;border:none;cursor:pointer;outline:none;">
+          <svg width="28" height="28" fill="#fff" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z"/></svg>
+        </button>
+        <div id="userDropdown" class="user-dropdown" style="display:none;position:absolute;right:0;top:36px;background:#fff;color:#003087;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);min-width:180px;z-index:10;">
+          <button class="dropdown-item" onclick="logout()" style="width:100%;background:#fff !important;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;color:#003087 !important;">Logout</button>
+          <button class="dropdown-item" onclick="showChangePassword()" style="width:100%;background:#fff !important;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;color:#003087 !important;">Change Password</button>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+    <!-- Add New Medicine Section -->
+    <section id="addMedicineSection">
+      <h3>Add New Medicine</h3>
+      <form id="addMedicineForm">
+        <label>Medicine Name: <input type="text" id="medicineName" required></label><br>
+        <label>Quantity: <input type="number" id="medicineQuantity" min="1" required></label><br>
+        <button type="submit">Add Medicine</button>
+      </form>
+    </section>
+    <!-- Update Stock Section -->
+    <section id="updateStockSection" style="margin-top:2em;">
+      <h3>Update Medicine Stock</h3>
+      <form id="updateStockForm">
+        <label>Select Medicine:
+          <select id="existingMedicineSelect" required></select>
+        </label><br>
+        <label>New Quantity: <input type="number" id="newMedicineQuantity" min="0" required></label><br>
+        <button type="submit">Update Stock</button>
+      </form>
+    </section>
+    <!-- Medicine Section -->
+    <section id="medicines">
+      <h3>Medicine Inventory</h3>
+      <ul id="medicineList"></ul>
+      <div id="medicineDetails"></div>
+    </section>
+
+    <!-- Prescription Section -->
+    <section id="prescriptions" class="hidden">
+      <h3>Search Prescription</h3>
+      <input type="text" id="prescriptionSearch" placeholder="Enter Patient ID or Name" onkeyup="searchPrescription()" />
+      <div id="prescriptionResults"></div>
+    </section>
+  </main>
+
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2rem 2.5rem;border-radius:10px;max-width:350px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,0.18);position:relative;">
+      <h3 style="color:#003087;margin-bottom:1.2rem;font-size:1.2rem;">Change Password</h3>
+      <form id="changePasswordForm">
+        <label style="font-size:0.98rem;">Current Password<br><input type="password" id="currentPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">New Password<br><input type="password" id="newPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">Confirm New Password<br><input type="password" id="confirmPassword" style="width:100%;margin-bottom:1.1rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <button type="submit" style="background:#003087;color:#fff;padding:0.7rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Save</button>
+        <button type="button" onclick="closeChangePassword()" style="margin-top:0.7rem;background:#eee;color:#003087;padding:0.6rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Cancel</button>
+        <div id="changePasswordMsg" style="margin-top:0.7rem;font-size:0.98rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/JS/pharmacist.js"></script>
+</body>
+</html>

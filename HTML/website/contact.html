@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClinicCare+ | Contact</title>
+  <link rel="stylesheet" href="/CSS/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="/IMAGES/logos.jpg" alt="ClinicCare+ Logo" class="logo" onerror="this.className='logo-fallback';this.src='';this.alt='Logo Not Found';">
+      <h1>ClinicCare+</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about_us.html">About</a></li>
+        <li><a href="our_doctors.html">Our Doctors</a></li>
+        <li><a href="departments.html">Departments</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="../Admin/admin_login.html" class="login-button">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="contact-container">
+      <section class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form>
+          <label for="fname">First Name:</label>
+          <input type="text" id="fname" name="firstname" required>
+
+          <label for="lname">Last Name:</label>
+          <input type="text" id="lname" name="lastname" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+      <section class="hospital-address">
+        <h3>ClinicCare+ Hospital Address</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Building Number: 92, Kumer Street, 73, Rosey Nagar, Trivandrum<br>
+          <i class="fas fa-phone"></i> Phone: +91 8837230058<br>
+          <i class="fas fa-envelope"></i> Email: cliniccare@gmail.com
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <img src="/IMAGES/logos.jpg" alt="ClinicCare+ Logo" class="logo" onerror="this.className='logo-fallback';this.src='';this.alt='Logo Not Found';">
+    <p>© 2025 ClinicCare+. All rights reserved.</p>
+  </footer>
+</body>
+</html>

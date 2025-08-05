@@ -1,0 +1,196 @@
+/* Doctor Dashboard Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fb;
+  color: #333;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #003087;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+header h1 {
+  font-size: 2rem;
+}
+
+header button {
+  background-color: #005b96;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+header button:hover {
+  background-color: #0077cc;
+}
+
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Patient Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.9rem;
+  text-align: left;
+}
+th {
+  background-color: #003087;
+  color: #fff;
+  font-weight: 500;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+tr:hover {
+  background-color: #e6f0ff;
+}
+.open-consult-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+.open-consult-btn:hover {
+  background-color: #218838;
+}
+
+/* Consultancy & History Section */
+#consultancySection {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+#consultancySection h3 {
+  color: #003087;
+  margin-bottom: 1rem;
+}
+#consultancySection label {
+  font-weight: 500;
+  color: #005b96;
+  display: block;
+  margin-top: 1rem;
+}
+#consultancySection textarea {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 5px;
+  border: 1px solid #66b0ff;
+  padding: 0.7rem;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+#consultancySection select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 1.5px solid #66b0ff;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+#consultancySection button {
+  background-color: #005b96;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 0.7rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+#consultancySection button:hover {
+  background-color: #0077cc;
+}
+#historySection {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+#labReportStatus {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.user-menu #userIconBtn svg {
+  fill: #fff !important;
+}
+
+.user-dropdown {
+  background: #fff !important;
+  color: #003087 !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.user-dropdown .dropdown-item {
+  color: #003087 !important;
+  background: transparent !important;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background: #f0f4fa !important;
+  color: #001d4a !important;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+  #consultancySection {
+    padding: 1rem;
+  }
+  th, td {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 480px) {
+  main {
+    padding: 0.5rem;
+  }
+  #consultancySection {
+    padding: 0.5rem;
+  }
+  th, td {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+  #consultancySection button {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+  }
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Tests - Laboratory Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <style>
+        .test-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .test-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px 5px 0 0;
+        }
+        .text-purple {
+            color: #6f42c1;
+        }
+        .card-body {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Title -->
+    <h1 align="center" class="my-4">Laboratory Management System</h1>
+
+    <!-- Top Contact Bar -->
+    <div class="bg-white border-bottom py-2 small">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-4">
+                <span><strong>Customer Care:</strong> 9700 36 9700</span>
+                <i class="bi bi-person-circle fs-5"></i>
+                <i class="bi bi-cart fs-5"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-purple text-white py-3">
+        <div class="container d-flex justify-content-around">
+            <a href="labhome.html" class="nav-link text-white fw-bold">Home</a>
+            <a href="availabletest.html" class="nav-link text-white">Available Tests</a>
+            <a href="createreport.html" class="nav-link text-white">Create Report</a>
+        </div>
+    </nav>
+
+    <!-- Back to Dashboard -->
+    <div class="container mt-3">
+        <a href="labhome.html" class="btn btn-light mb-3">← Back to Dashboard</a>
+    </div>
+
+    <!-- Search Section -->
+    <div class="container my-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <form action="availabletest.html" method="get">
+                    <div class="input-group">
+                        <input type="text" name="query" id="searchInput" class="form-control shadow-sm" placeholder="Search for Tests & Packages" />
+                        <button type="submit" class="btn btn-outline-primary">Search Test</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Section -->
+    <div class="container mb-5" id="test-section">
+        <h3 class="mb-4">Available Tests</h3>
+        <div class="row g-4">
+            <!-- CBC Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/cbc.webp" alt="CBC Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Haemogram (CBC)</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Hemoglobin (Hb)<br>
+                            Hematocrit (Hct)<br>
+                            WBC, RBC<br>
+                            Platelet Count<br>
+                            MCV, MCH, MCHC
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blood Sugar Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/sugar.jpg" alt="Blood Sugar Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Blood Sugar Tests</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Fasting Blood Sugar (FBS)<br>
+                            Postprandial (PPBS)<br>
+                            Random (RBS)<br>
+                            HbA1c
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liver Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/liver.jpg" alt="Liver Function Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Liver Function Test</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Bilirubin (T/D/I)<br>
+                            SGOT/AST<br>
+                            SGPT/ALT<br>
+                            ALP<br>
+                            Albumin<br>
+                            Globulin<br>
+                            Total Protein
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kidney Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/kidney.png" alt="Kidney Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Kidney Test</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Blood Urea<br>
+                            Serum Creatinine<br>
+                            BUN<br>
+                            Uric Acid
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lungs Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/lung.webp" alt="Lungs Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Lungs Test</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Chest X-Ray<br>
+                            HRCT Chest<br>
+                            Spirometry<br>
+                            PFT<br>
+                            ABG<br>
+                            COVID RT-PCR
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heart Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/heart.jpg" alt="Heart Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Heart Test</h5>
+                        <p><strong>Tests included:</strong><br>
+                            ECG<br>
+                            2D Echo<br>
+                            TMT<br>
+                            Troponin<br>
+                            CK-MB<br>
+                            Lipid Profile
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infectious Disease Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/disease.jpg" alt="Infectious Diseases Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Infectious Diseases</h5>
+                        <p><strong>Tests included:</strong><br>
+                            HIV 1 & 2<br>
+                            HBsAg<br>
+                            HCV<br>
+                            Dengue<br>
+                            Widal<br>
+                            Malaria
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vitamin & Mineral Test -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/vitamin.jpg" alt="Vitamin & Mineral Test" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Vitamin & Mineral</h5>
+                        <p><strong>Tests included:</strong><br>
+                            Vitamin B12<br>
+                            Vitamin D (25-OH)<br>
+                            Calcium<br>
+                            Iron, Ferritin<br>
+                            Zinc<br>
+                            Magnesium
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thyroid Profile -->
+            <div class="col-md-4">
+                <div class="card test-card p-3 shadow-sm">
+                    <img src="/IMAGES/thyroid.jpg" alt="Thyroid Profile" class="img" />
+                    <div class="card-body">
+                        <h5 class="text-purple">Thyroid Profile</h5>
+                        <p><strong>Tests included:</strong><br>
+                            T3 (Triiodothyronine)<br>
+                            T4 (Thyroxine)<br>
+                            TSH
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="noResults" style="display:none;text-align:center;color:#dc3545;font-weight:bold;">No test results found.</div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="/JS/availabletest.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login – ClinicCare+</title>
+  <link rel="stylesheet" href="/CSS/admin.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login to ClinicCare+</h2>
+    <form id="loginForm">
+      <span id="success" style="color:#0a775f;"></span><br>
+      <label for="username">Username:</label>
+      <input type="email" id="username" name="username" placeholder="Enter Username"/>
+      <span id="usernameError" style="color: red;"></span>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter Your Password" />
+      <span id="passwordError" style="color: red;"></span>
+
+      <button type="submit">Login</button>
+    </form>
+    <a href="#" class="forgot-password">Forgot Password?</a>
+    <a href="../website/home.html" class="back-home">←Back to Home</a>
+
+    <section id="forgot-password-form" style="display: none;">
+      <h3>Forgot Password</h3>
+      <form id="forgotForm">
+        <label for="fpEmail">Enter your registered email:</label>
+        <input type="email" id="fpEmail" required />
+        <button type="submit">Request Password Reset</button>
+        <button type="button" onclick="backToLogin()">Back to Login</button>
+        <p id="fpMessage"></p>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 ClinicCare+. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Redirect to login if session is not valid
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+
+    document.querySelector('.forgot-password').addEventListener('click', () => {
+      document.querySelector('#loginForm').style.display = 'none';
+      document.querySelector('#forgot-password-form').style.display = 'block';
+    });
+
+    function backToLogin() {
+      document.getElementById("forgot-password-form").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+      document.getElementById("fpEmail").value = "";
+      document.getElementById("fpMessage").textContent = "";
+    }
+
+    document.getElementById("forgotForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("fpEmail").value.trim();
+      const staff = localStorage.getItem("staff_" + email);
+
+      if (!staff) {
+        document.getElementById("fpMessage").textContent = "Email not found.";
+        return;
+      }
+
+      const requestKey = "request_" + email;
+      const date = new Date().toLocaleString();
+      const request = {
+                      email,
+                      type: "ForgotPassword",
+                      date,
+                      status: "pending"
+      };
+      localStorage.setItem(requestKey, JSON.stringify(request));
+
+      document.getElementById("fpMessage").textContent = "Request sent to admin.";
+    });
+  </script>
+  <script src="/JS/login.js"></script>
+  <script>
+    // Always clear session data on login page load
+    localStorage.removeItem("sessionStart");
+
+    // Only redirect to the correct dashboard if the user is valid
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+      try {
+        const parsed = JSON.parse(user);
+        if (parsed.role === "Admin") {
+          window.location.href = "/HTML/Admin/admin_dashboard.html";
+        } else if (parsed.role === "Doctor") {
+          window.location.href = "/HTML/Doctor/doctor_dashboard.html";
+        } else {
+          // Not a recognized role, clear session
+          localStorage.removeItem("loggedInUser");
+        }
+      } catch (e) {
+        localStorage.removeItem("loggedInUser");
+      }
+    }
+    // Prevent going back to dashboard from login page
+    history.pushState(null, null, location.href);
+    window.addEventListener("popstate", function () {
+      history.pushState(null, null, location.href);
+    });
+  </script>
+</body>
+</html>

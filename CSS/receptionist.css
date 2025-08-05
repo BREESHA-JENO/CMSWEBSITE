@@ -1,0 +1,20 @@
+.user-menu #userIconBtn svg {
+  fill: #fff !important;
+}
+
+.user-dropdown {
+  background: #fff !important;
+  color: #003087 !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.user-dropdown .dropdown-item {
+  color: #003087 !important;
+  background: transparent !important;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background: #f0f4fa !important;
+  color: #001d4a !important;
+} 

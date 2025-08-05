@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClinicCare+ - Doctor Dashboard</title>
+  <link rel="stylesheet" href="/CSS/doctor.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">ClinicCare+</div>
+    <nav>
+      <!-- Removed Home link -->
+      <!-- User Icon Dropdown -->
+      <div class="user-menu" style="position:relative;display:inline-block;">
+        <button id="userIconBtn" style="background:none;border:none;cursor:pointer;outline:none;">
+          <svg width="28" height="28" fill="#003087" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z"/></svg>
+        </button>
+        <div id="userDropdown" class="user-dropdown" style="display:none;position:absolute;right:0;top:36px;background:#fff;color:#003087;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);min-width:180px;z-index:10;">
+          <button class="dropdown-item" onclick="logout()" style="width:100%;background:none;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;">Logout</button>
+          <button class="dropdown-item" onclick="showChangePassword()" style="width:100%;background:none;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;">Change Password</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- Main Dashboard -->
+  <main class="dashboard">
+    <h2 id="doctorWelcome">Welcome, Doctor</h2>
+    <div class="dashboard-grid">
+      <!-- Patient List Table -->
+      <div class="card">
+        <h3>My Patients</h3>
+        <table class="patient-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Token ID</th>
+              <th>Patient ID</th>
+              <th>Patient Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="table_body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+      <!-- Consultancy Section (hidden by default) -->
+      <div class="card" id="consultancySection" style="display:none;">
+        <h3>Consultancy for <span id="consultPatientName"></span> (<span id="consultPatientId"></span>, Age: <span id="consultPatientAge"></span>)</h3>
+        <button id="historyBtn" type="button">History</button>
+        <button id="todayConsultBtn" type="button">Today's Consultancy</button>
+        <div id="historySection" style="display:none;"></div>
+        <form id="consultForm" style="display:none;">
+          <label>Symptoms:<br><input type="text" id="symptoms" required></label><br>
+          <label>Diagnosis:<br><input type="text" id="diagnosis" required></label><br>
+          <label>Notes:<br><textarea id="notes" required></textarea></label><br>
+          <label>Prescription:<br>
+            <select id="prescriptionSelect" required></select>
+          </label><br>
+          <label>Lab Test:<br>
+            <select id="labTestSelect"></select>
+          </label><br>
+          <span id="labReportStatus" style="color: #003087;"></span><br>
+          <button type="submit">Save Consultancy</button>
+          <button type="button" id="printBtn">Print</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ClinicCare+. All rights reserved.</p>
+  </footer>
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2rem 2.5rem;border-radius:10px;max-width:350px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,0.18);position:relative;">
+      <h3 style="color:#003087;margin-bottom:1.2rem;font-size:1.2rem;">Change Password</h3>
+      <form id="changePasswordForm">
+        <label style="font-size:0.98rem;">Current Password<br><input type="password" id="currentPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">New Password<br><input type="password" id="newPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">Confirm New Password<br><input type="password" id="confirmPassword" style="width:100%;margin-bottom:1.1rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <button type="submit" style="background:#003087;color:#fff;padding:0.7rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Save</button>
+        <button type="button" onclick="closeChangePassword()" style="margin-top:0.7rem;background:#eee;color:#003087;padding:0.6rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Cancel</button>
+        <div id="changePasswordMsg" style="margin-top:0.7rem;font-size:0.98rem;"></div>
+      </form>
+    </div>
+  </div>
+  <script src="/JS/doctor.js"></script>
+</body>
+</html>

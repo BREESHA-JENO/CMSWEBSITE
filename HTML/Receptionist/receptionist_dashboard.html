@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClinicCare+ - Receptionist Dashboard</title>
+  <link rel="stylesheet" href="/CSS/admin.css" />
+</head>
+<body>
+  <aside>
+    <h2>Receptionist Panel</h2>
+    <nav>
+      <a href="#" onclick="showSection('addPatient')">Add Patient</a>
+      <a href="#" onclick="showSection('updatePatient')">Update Patient</a>
+      <a href="#" onclick="showSection('viewAllPatients')">View Patients</a>
+      <a href="#" onclick="showSection('appointments')">Appointments and Token Generation</a>
+      <a href="#" onclick="showSection('report')">Billing Reports</a>
+      <a href="#" onclick="showSection('tokens')">Display All Tokens</a>
+      <!-- User Icon Dropdown -->
+      <div class="user-menu" style="position:relative;display:inline-block;">
+        <button id="userIconBtn" style="background:none;border:none;cursor:pointer;outline:none;">
+          <svg width="28" height="28" fill="#fff" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z"/></svg>
+        </button>
+        <div id="userDropdown" class="user-dropdown" style="display:none;position:absolute;right:0;top:36px;background:#fff;color:#003087;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);min-width:180px;z-index:10;">
+          <button class="dropdown-item" onclick="logout()" style="width:100%;background:none;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;color:#003087 !important;">Logout</button>
+          <button class="dropdown-item" onclick="showChangePassword()" style="width:100%;background:none;border:none;padding:12px 18px;text-align:left;cursor:pointer;font-size:1rem;color:#003087 !important;">Change Password</button>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+        <!-- Add Patient Form -->
+    <section id="addPatient">
+      <h3>Add New Patient</h3>
+      <!-- Removed validation rules info box -->
+      <form id="patientForm">
+          <label>Name: <input type="text" name="name" placeholder="Enter full name" maxlength="30" pattern="^[A-Za-z\s]+$" title="Name should only contain letters and spaces, max 30 characters" required></label><br>
+          <label>Age: <input type="number" name="age" min="0" max="130" maxlength="3" title="Age should be a number between 0 and 130" required></label><br>
+          <label>Email: <input type="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address" required></label><br>
+          <label>Contact: <input type="tel" name="contact" pattern="^\d{10}$" maxlength="10" minlength="10" placeholder="+91" title="Contact should be exactly 10 digits" required></label><br>
+        <label>Address: <textarea name="address" rows="3" style="width:100%"></textarea></label><br>
+        <label>Gender:</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="Male" checked> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div><br>
+        <label>Registration Date: <input type="date" name="registrationDate" id="registrationDate" required></label><br>
+        <label>Medical History: <textarea name="history" rows="5" style="width:100%"></textarea></label><br>
+        <button type="submit">Save Patient</button>
+      </form>
+    </section>
+
+
+
+    <!-- Update Patient -->
+    <section id="updatePatient" class="hidden">
+      <h3>Update Patient Information</h3>
+      <div class="search-section">
+        <h4>Search Patient to Update</h4>
+        <div class="search-filters">
+          <input type="text" id="updateSearchUnified" placeholder="Search by Name, ID, or Email..." />
+          <button onclick="searchPatientForUpdateUnified()">Search</button>
+          <button onclick="clearUpdateSearch()">Clear</button>
+        </div>
+        <div id="updateSearchResults"></div>
+      </div>
+      <div id="updatePatientFormSection" style="display: none;">
+        <h4>Update Patient Details</h4>
+        <form id="updatePatientForm">
+          <input type="hidden" id="updatePatientId" name="id">
+          <label>Name: <input type="text" id="updatePatientName" name="name"></label><br>
+          <label>Age: <input type="number" id="updatePatientAge" name="age"></label><br>
+          <label>Email: <input type="email" id="updatePatientEmail" name="email"></label><br>
+          <label>Contact: <input type="tel" id="updatePatientContact" name="contact" placeholder="+91"></label><br>
+          <label>Address: <input type="text" id="updatePatientAddress" name="address"></label><br>
+          <label>Gender:</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="Male" id="updateGenderMale"> Male</label>
+            <label><input type="radio" name="gender" value="Female" id="updateGenderFemale"> Female</label>
+            <label><input type="radio" name="gender" value="Other" id="updateGenderOther"> Other</label>
+          </div><br>
+          <label>Registration Date: <input type="date" id="updatePatientRegDate" name="registrationDate" readonly></label><br>
+          <label>Medical History: <textarea id="updatePatientHistory" name="history" rows="5" style="width:100%"></textarea></label><br>
+          <label>Status:</label>
+          <div class="status-options">
+            <label><input type="radio" name="status" value="active" id="updateStatusActive"> Active</label>
+            <label><input type="radio" name="status" value="inactive" id="updateStatusInactive"> Inactive</label>
+          </div><br>
+          <button type="submit">Update Patient</button>
+          <button type="button" onclick="cancelUpdate()">Cancel</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Reports -->
+    <section id="report" class="hidden">
+      <h3>Billing Reports</h3>
+      <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+        <input type="text" id="billingSearchName" placeholder="Search by patient name or ID..." style="margin-right: 10px;" />
+        <input type="date" id="billingSearchDate" style="margin-right: 10px;" />
+        <button onclick="displayBillingReportsTable()">Search</button>
+      </div>
+      <div id="billingReportsTable"></div>
+    </section>
+
+    <!-- Appointment Scheduling -->
+    <section id="appointments" class="hidden">
+      <h3>Appointments and Token Generation</h3>
+      <form id="appointmentForm">
+        <label>Patient ID: <input type="text" id="appointmentPatientId" onchange="autoFillPatientDetails()" onkeyup="autoFillPatientDetails()" required></label><br>
+        <label>Patient Name: <input type="text" id="appointmentPatientName" readonly></label><br>
+        <label>Doctor:
+          <select id="appointmentDoctor" required>
+            <option value="">Select Doctor</option>
+          </select>
+        </label><br>
+        <label>Date: <input type="date" id="appointmentDate" min="" oninput="validateDateInput(this)" required></label><br>
+        <label>Time: <input type="time" id="appointmentTime" oninput="validateTimeInput(this)" required></label><br>
+        <label>Reason: <textarea id="appointmentReason" rows="4" style="width:100%"></textarea></label><br>
+        <button type="submit">Schedule Appointment</button>
+      </form>
+      <div style="margin-top: 24px;"></div>
+      <div id="appointmentsList"></div>
+    </section>
+
+    <!-- Search and View All Patients -->
+    <section id="viewAllPatients" class="hidden">
+      <h3>View Patients</h3>
+      <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+        <input type="text" id="searchName" placeholder="Search by name or ID..." style="margin-right: 10px;" />
+        <input type="date" id="searchDate" style="margin-right: 10px;" />
+        <button onclick="searchPatientsUnified()">Search</button>
+      </div>
+      <div id="patientsDisplayArea"></div>
+    </section>
+
+    <!-- Patient History -->
+    <section id="patientHistory" class="hidden">
+      <h3>Patient History</h3>
+      <div id="patientHistoryArea"></div>
+    </section>
+
+    <!-- Token Generation -->
+    <section id="tokens" class="hidden">
+      <h3>Display All Tokens</h3>
+      <div>
+        <label>Doctor: <select id="tokenDoctor" onchange="loadTokenInfo();displayAllTokensTable();"></select></label>
+        <label>Date: <input type="date" id="tokenDate" onchange="loadTokenInfo();displayAllTokensTable();"></label>
+        <button onclick="filterTokens();displayAllTokensTable();">Filter</button>
+        <div id="tokenInfo">
+          <p>Select doctor and date to view token availability</p>
+        </div>
+        <div id="allTokensTable"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2rem 2.5rem;border-radius:10px;max-width:350px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,0.18);position:relative;">
+      <h3 style="color:#003087;margin-bottom:1.2rem;font-size:1.2rem;">Change Password</h3>
+      <form id="changePasswordForm">
+        <label style="font-size:0.98rem;">Current Password<br><input type="password" id="currentPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">New Password<br><input type="password" id="newPassword" style="width:100%;margin-bottom:0.7rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <label style="font-size:0.98rem;">Confirm New Password<br><input type="password" id="confirmPassword" style="width:100%;margin-bottom:1.1rem;padding:0.6rem;border:1px solid #ccc;border-radius:5px;"></label><br>
+        <button type="submit" style="background:#003087;color:#fff;padding:0.7rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Save</button>
+        <button type="button" onclick="closeChangePassword()" style="margin-top:0.7rem;background:#eee;color:#003087;padding:0.6rem 1.2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;width:100%;">Cancel</button>
+        <div id="changePasswordMsg" style="margin-top:0.7rem;font-size:0.98rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/JS/receptionist.js"></script>
+  <script>
+    // Set registration date min (today) and max (3 weeks from today)
+    document.addEventListener('DOMContentLoaded', function() {
+      const regDate = document.getElementById('registrationDate');
+      if (regDate) {
+        const today = new Date();
+        const maxDate = new Date();
+        maxDate.setDate(today.getDate() + 21);
+        const toISO = d => d.toISOString().split('T')[0];
+        regDate.min = toISO(today);
+        regDate.max = toISO(maxDate);
+      }
+      // Block number keys in Name field
+      const nameInput = document.querySelector('input[name="name"]');
+      if (nameInput) {
+        nameInput.addEventListener('keydown', function(e) {
+          // Allow: backspace, tab, left/right arrows, delete, space
+          if ([8,9,37,39,46,32].includes(e.keyCode)) return;
+          // Block number keys (top row and numpad)
+          if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+            e.preventDefault();
+          }
+        });
+      }
+      // Prevent more than 3 digits in Age field
+      const ageInput = document.querySelector('input[name="age"]');
+      if (ageInput) {
+        ageInput.addEventListener('input', function(e) {
+          if (this.value.length > 3) {
+            this.value = this.value.slice(0, 3);
+          }
+        });
+      }
+    });
+
+    // User icon dropdown logic
+    const userIconBtn = document.getElementById('userIconBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    userIconBtn.onclick = function(e) {
+      e.stopPropagation();
+      userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+    };
+    document.body.addEventListener('click', function() {
+      userDropdown.style.display = 'none';
+    });
+    userDropdown.onclick = function(e) { e.stopPropagation(); };
+
+    // Change Password Modal logic
+    function showChangePassword() {
+      document.getElementById('changePasswordModal').style.display = 'flex';
+      document.getElementById('changePasswordMsg').textContent = '';
+      document.getElementById('changePasswordForm').reset();
+    }
+    function closeChangePassword() {
+      document.getElementById('changePasswordModal').style.display = 'none';
+    }
+    document.getElementById('changePasswordForm').onsubmit = function(e) {
+      e.preventDefault();
+      const current = document.getElementById('currentPassword').value;
+      const newPass = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      const loggedIn = JSON.parse(localStorage.getItem('loggedInUser'));
+      const userKey = 'user_' + loggedIn.username;
+      const userObj = JSON.parse(localStorage.getItem(userKey));
+      const msgDiv = document.getElementById('changePasswordMsg');
+      if (!current || !newPass || !confirm) {
+        msgDiv.textContent = 'All fields are required.';
+        msgDiv.style.color = '#dc3545';
+        return;
+      }
+      if (userObj.password !== current) {
+        msgDiv.textContent = 'Current password is incorrect.';
+        msgDiv.style.color = '#dc3545';
+        return;
+      }
+      if (newPass.length < 6) {
+        msgDiv.textContent = 'New password must be at least 6 characters.';
+        msgDiv.style.color = '#dc3545';
+        return;
+      }
+      if (newPass !== confirm) {
+        msgDiv.textContent = 'New passwords do not match.';
+        msgDiv.style.color = '#dc3545';
+        return;
+      }
+      userObj.password = newPass;
+      localStorage.setItem(userKey, JSON.stringify(userObj));
+      msgDiv.textContent = 'Password changed successfully!';
+      msgDiv.style.color = '#28a745';
+      setTimeout(closeChangePassword, 1200);
+    };
+  </script>
+</body>
+</html>

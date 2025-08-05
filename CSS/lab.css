@@ -1,0 +1,372 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f7fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main heading */
+h1, h2 {
+  color: #003087;
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 2.2rem;
+}
+
+h3 {
+  color: #003087;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+/* Top contact bar */
+.bg-white.border-bottom {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #005b96;
+}
+
+.bg-white.border-bottom .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.bg-white.border-bottom span {
+  font-weight: 500;
+}
+
+.bg-white.border-bottom i {
+  color: #005b96;
+}
+
+/* Navigation bar */
+.bg-purple {
+  background-color: #003087;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.bg-purple .container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem; /* Added to match typical nav link size */
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background-color: #002060;
+}
+
+.bg-purple .container button {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem; /* Match nav-link font size */
+  padding: 0.5rem 1rem; /* Match nav-link padding */
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  line-height: 1.6; /* Match body line-height for consistency */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.bg-purple .container button:hover {
+  color: #fff;
+  background-color: #002060;
+}
+
+/* Search section */
+.container.my-4 .input-group {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container.my-4 .form-control {
+  padding: 0.8rem;
+  border: 1px solid #66b0ff;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.container.my-4 .form-control:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.3);
+}
+
+.container.my-4 .btn-outline-primary {
+  background-color: #005b96;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.container.my-4 .btn-outline-primary:hover {
+  background-color: #0077cc;
+}
+
+/* Test cards */
+.test-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.test-card h5 {
+  color: #003087;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.test-card .img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.test-card p {
+  color: #005b96;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.test-card p strong {
+  color: #003087;
+}
+
+/* Report form */
+.card.p-4 {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  color: #005b96;
+  font-weight: 500;
+}
+
+.form-control, .form-select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #66b0ff;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.3);
+}
+
+.form-control[type="date"] {
+  padding: 0.6rem;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-success {
+  background-color: #005b96;
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #0077cc;
+}
+
+.btn-light {
+  background-color: #fff;
+  color: #005b96;
+  border: 1px solid #66b0ff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-light:hover {
+  background-color: #e6f0ff;
+  color: #0077cc;
+}
+
+/* Pleasant report card styles for viewreport.html */
+.report-card {
+  background: #f8f9fa;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  transition: box-shadow 0.2s;
+}
+.report-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.report-card .patient-name {
+  color: #003087;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.report-card .card-title {
+  color: #6f42c1;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.report-card ul {
+  margin-top: 0.5rem;
+}
+
+/* Header */
+header.bg-primary {
+  background-color: #003087;
+  color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* Footer */
+footer.bg-dark {
+  background-color: #003087;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+footer small {
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1, h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .bg-purple .container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .container.my-4 .input-group {
+    flex-direction: column;
+  }
+
+  .container.my-4 .btn-outline-primary {
+    width: 100%;
+  }
+
+  .card.p-4 {
+    margin: 1.5rem 0.8rem;
+    padding: 1.5rem;
+  }
+
+  .test-card {
+    padding: 1rem;
+  }
+
+  .test-card h5 {
+    font-size: 1.1rem;
+  }
+
+  .test-card p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 augments , h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .bg-white.border-bottom {
+    font-size: 0.8rem;
+  }
+
+  .form-control, .form-select, .btn-success, .btn-light {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .test-card .img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .row.g-4 {
+    gap: 0.5rem;
+  }
+}
+
+.user-dropdown .dropdown-item {
+  color: #003087 !important;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background: #f0f4fa !important;
+  color: #001d4a !important;
+}

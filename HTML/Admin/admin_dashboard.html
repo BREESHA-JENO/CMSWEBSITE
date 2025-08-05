@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClinicCare+ Admin Dashboard</title>
+  <link rel="stylesheet" href="/CSS/admin.css" />
+  <script>
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (!user || user.role !== "Admin") {
+    alert("Unauthorized access. Please log in.");
+    window.location.href = "/HTML/Admin/admin_login.html";
+  }
+
+  // 🚫 Block back navigation after login
+  history.pushState(null, null, location.href);
+  window.addEventListener("popstate", function (event) {
+    history.pushState(null, null, location.href);
+  });
+  </script>
+
+</head>
+<body onload="initAdminDashboard()">
+  <aside>
+    <h2>Admin Panel</h2>
+    <nav>
+      <a href="#" onclick="showSection('staffDetails')">Add Staff Details</a>
+      <a href="#" id="generateCredentialsLink" class="disabled" onclick="showSection('generateCredentials')">Generate Credentials</a>
+      <a href="#" onclick="showSection('resetPassword')">Reset Password</a>
+      <a href="#" onclick="showSection('viewAllStaff')">View Full Staff Details</a>
+      <a href="#" onclick="showSection('requestSection')">Pending Requests</a>
+      <button type="submit" id="logoutBtn" onclick="logout()">Logout</button>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="staffDetails">
+      <h3 id="formTitle">Staff Details Management</h3>
+      <form id="staffForm" data-editing="false">
+        <label>Name: <input type="text" name="name" pattern="[A-Za-z ]+" required placeholder="Alphabets only"></label><br>
+        <label>Email: <input type="email" name="email" id="emailField" required placeholder="example@gmail.com or example@yahoo.com"></label>
+        <small style="color: #666; font-size: 12px;">Only @gmail.com and @yahoo.com domains are allowed</small><br>
+        <label>DOB: <input type="date" name="dob" required></label><br>
+        <label>Gender:</label>
+        <div class="gender-options">
+          <label><input type="radio" name="gender" value="Male" checked> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div><br>
+        <label>Phone: <input type="tel" name="tel" required placeholder="Unique 10-digit number"></label><br>
+        <label>Address: <input type="text" name="address" required></label><br>
+        <label>Blood Group:
+          <select name="bloodGroup" required>
+            <option value="">Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </label><br>
+        <label>Role:
+          <select name="role" onchange="toggleDoctorFields(this.value)" required>
+            <option value="">Select</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Receptionist">Receptionist</option>
+            <option value="Pharmacist">Pharmacist</option>
+            <option value="Lab Technician">Lab Technician</option>
+          </select>
+        </label><br>
+        <div id="doctorFields" style="display:none;">
+          <label>Specialization:
+            <select name="specialization" id="specializationDropdown" onchange="handleSpecializationChange(this)">
+              <option value="">Select Specialization</option>
+              <option value="General Medicine">General Medicine</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Gynecology">Gynecology</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Dermatology">Dermatology</option>
+              <option value="ENT">ENT</option>
+              <option value="Ophthalmology">Ophthalmology</option>
+              <option value="Psychiatry">Psychiatry</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" name="specializationOther" id="specializationOther" placeholder="Enter specialization" style="display:none; margin-top:6px;" />
+          </label><br>
+          <label>Consultation Charges: <input type="number" name="charges"></label><br>
+          <label>Working Days:</label>
+          <div id="workingDaysButtons" style="margin-bottom:8px;">
+            <button type="button" class="day-btn" data-day="Monday">Mon</button>
+            <button type="button" class="day-btn" data-day="Tuesday">Tue</button>
+            <button type="button" class="day-btn" data-day="Wednesday">Wed</button>
+            <button type="button" class="day-btn" data-day="Thursday">Thu</button>
+            <button type="button" class="day-btn" data-day="Friday">Fri</button>
+            <button type="button" class="day-btn" data-day="Saturday">Sat</button>
+            <button type="button" class="day-btn" data-day="Sunday">Sun</button>
+          </div>
+          <small style="color:#666;font-size:12px;">Select at least 3 days</small><br>
+          <input type="hidden" name="workingDays" id="workingDaysInput">
+          <label>Working Time:
+            <select name="workingTime">
+              <option value="">workingTime</option>
+              <option value="9am-1pm">9am-1pm</option>
+              <option value="12pm-4pm">12pm-4pm</option>
+              <option value="4pm-8pm">4pm-8pm</option>
+            </select>
+          </label><br>
+        </div>
+        <button type="submit">Save Staff</button>
+      </form>
+    </section>
+
+    <section id="generateCredentials" class="hidden">
+      <h3>Generate Staff Credentials</h3>
+      <form id="credentialsForm">
+        <label>Username (Email): <input type="email" name="username" readonly required></label><br>
+        <label>Password: <input type="text" name="password" readonly></label><br>
+        <button type="button" onclick="generateAndSaveCredentials()">Generate & Save</button>
+        <p id="credentialStatus"></p>
+      </form>
+    </section>
+
+    <section id="resetPassword" class="hidden">
+      <h3>Reset Staff Password</h3>
+      <form id="resetForm">
+        <label>Email/Username:
+          <input type="email" name="resetUser" id="resetUser" readonly required>
+        </label><br>
+        <label>New Password:
+          <input type="text" name="newPassword" id="newPassword">
+          <button type="button" onclick="autoGeneratePassword()">Regenerate</button>
+        </label><br>
+        <button type="submit">Update Password</button>
+        <p id="resetStatus"></p>
+      </form>
+    </section>
+
+    <section id="viewAllStaff" class="hidden">
+      <h3>All Staff Records</h3>
+      <input type="text" id="searchEmail" placeholder="Search by email or ID...">
+      <button type="submit" id="searchButton">Search</button>
+      <div id="staffDisplayArea"></div>
+    </section>
+
+    <section id="requestSection" class="hidden">
+      <h3>Pending Staff Requests</h3>
+      <div id="pendingRequestsContainer"></div>
+    </section>
+  </main>
+
+  <script>
+    function initAdminDashboard() {
+      document.getElementById("searchEmail").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          searchStaff();
+        }
+      });
+
+      document.getElementById("searchButton").addEventListener("click", function () {
+        searchStaff();
+      });
+
+      window.searchStaff = function () {
+        const keyword = document.getElementById("searchEmail").value.trim();
+        const staffDisplay = document.getElementById('staffDisplayArea');
+        staffDisplay.innerHTML = "";
+
+        if (!keyword) return;
+
+        for (let key in localStorage) {
+          if (key.startsWith("staff_")) {
+            const staff = JSON.parse(localStorage.getItem(key));
+            if (staff.email === keyword || staff.staffId === keyword) {
+              let table = `<table>
+                <tr><th>ID</th><td>${staff.staffId}</td></tr>
+                <tr><th>Name</th><td>${staff.name}</td></tr>
+                <tr><th>Email</th><td>${staff.email}</td></tr>
+                <tr><th>Role</th><td>${staff.role}</td></tr>
+                <tr><th>Phone</th><td>${staff.tel}</td></tr>
+                <tr><th>Address</th><td>${staff.address}</td></tr>
+                <tr><th>DOB</th><td>${staff.dob}</td></tr>
+                <tr><th>Gender</th><td>${staff.gender}</td></tr>
+                <tr><th>Blood Group</th><td>${staff.bloodGroup || ''}</td></tr>
+                <tr><th>Status</th><td>${staff.status}</td></tr>`;
+
+              if (staff.role === "Doctor") {
+                table += `<tr><th>Specialization</th><td>${staff.specialization}</td></tr>
+                  <tr><th>Consultation Fee</th><td>${staff.charges}</td></tr>
+                  <tr><th>Working Days</th><td>${staff.workingDays}</td></tr>
+                  <tr><th>Working Time</th><td>${staff.workingTime}</td></tr>`;
+              }
+
+              table += `</table><br><button onclick="displayAllStaff()">Back to Staff List</button>`;
+              staffDisplay.innerHTML = table;
+              return;
+            }
+          }
+        }
+
+        staffDisplay.innerHTML = "<p>No staff found with that email or ID.</p>";
+      }
+    }
+  </script>
+
+  <script src="/JS/admin.js"></script>
+</body>
+</html>

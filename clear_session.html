@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Session</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Session Management Utility</h1>
+        
+        <div class="info">
+            <h3>Current Session Status:</h3>
+            <div id="sessionStatus"></div>
+        </div>
+        
+        <h3>Actions:</h3>
+        <button onclick="clearSession()">Clear All Session Data</button>
+        <button onclick="goToLogin()">Go to Login Page</button>
+        <button onclick="refreshStatus()">Refresh Status</button>
+        
+        <div class="info">
+            <h3>Instructions:</h3>
+            <p>If you're experiencing login issues or redirect loops:</p>
+            <ol>
+                <li>Click "Clear All Session Data" to remove all stored session information</li>
+                <li>Click "Go to Login Page" to navigate to the login page</li>
+                <li>Try logging in again</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function updateSessionStatus() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            const sessionStart = localStorage.getItem("sessionStart");
+            const statusDiv = document.getElementById("sessionStatus");
+            
+            let status = "";
+            
+            if (loggedInUser) {
+                const user = JSON.parse(loggedInUser);
+                status += `<p><strong>Logged in as:</strong> ${user.role} (${user.username})</p>`;
+            } else {
+                status += "<p><strong>Not logged in</strong></p>";
+            }
+            
+            if (sessionStart) {
+                const sessionAge = Date.now() - parseInt(sessionStart);
+                const isExpired = sessionAge > (1 * 60 * 1000); // 1 minute
+                status += `<p><strong>Session age:</strong> ${Math.round(sessionAge / 1000)} seconds ${isExpired ? '(EXPIRED)' : '(ACTIVE)'}</p>`;
+            } else {
+                status += "<p><strong>No session start time</strong></p>";
+            }
+            
+            statusDiv.innerHTML = status;
+        }
+        
+        function clearSession() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("sessionStart");
+            alert("Session data cleared successfully!");
+            updateSessionStatus();
+        }
+        
+        function goToLogin() {
+            window.location.href = "/HTML/Admin/admin_login.html";
+        }
+        
+        function refreshStatus() {
+            updateSessionStatus();
+        }
+        
+        // Initialize
+        updateSessionStatus();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Access Test</title>
+</head>
+<body>
+    <h1>Role Access Test</h1>
+    <p>This page tests role-based access control.</p>
+    
+    <div id="currentUser"></div>
+    
+    <h2>Test Access to Different Dashboards:</h2>
+    <button onclick="testAdminAccess()">Test Admin Dashboard Access</button>
+    <button onclick="testReceptionistAccess()">Test Receptionist Dashboard Access</button>
+    <button onclick="testPharmacistAccess()">Test Pharmacist Dashboard Access</button>
+    <button onclick="testLabAccess()">Test Lab Dashboard Access</button>
+    
+    <h2>Simulate Login:</h2>
+    <button onclick="loginAsAdmin()">Login as Admin</button>
+    <button onclick="loginAsReceptionist()">Login as Receptionist</button>
+    <button onclick="loginAsPharmacist()">Login as Pharmacist</button>
+    <button onclick="loginAsLabTech()">Login as Lab Technician</button>
+    <button onclick="logout()">Logout</button>
+    
+    <script>
+        function updateCurrentUser() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            const userDiv = document.getElementById("currentUser");
+            
+            if (loggedInUser) {
+                const user = JSON.parse(loggedInUser);
+                userDiv.innerHTML = `<p><strong>Currently logged in as:</strong> ${user.role} (${user.username})</p>`;
+            } else {
+                userDiv.innerHTML = "<p><strong>Not logged in</strong></p>";
+            }
+        }
+        
+        function loginAsAdmin() {
+            const adminUser = {
+                username: "admin@example.com",
+                password: "admin123",
+                role: "Admin"
+            };
+            localStorage.setItem("loggedInUser", JSON.stringify(adminUser));
+            localStorage.setItem("sessionStart", Date.now().toString());
+            updateCurrentUser();
+            alert("Logged in as Admin");
+        }
+        
+        function loginAsReceptionist() {
+            const receptionistUser = {
+                username: "receptionist@example.com",
+                password: "receptionist123",
+                role: "Receptionist"
+            };
+            localStorage.setItem("loggedInUser", JSON.stringify(receptionistUser));
+            localStorage.setItem("sessionStart", Date.now().toString());
+            updateCurrentUser();
+            alert("Logged in as Receptionist");
+        }
+        
+        function loginAsPharmacist() {
+            const pharmacistUser = {
+                username: "pharmacist@example.com",
+                password: "pharmacist123",
+                role: "Pharmacist"
+            };
+            localStorage.setItem("loggedInUser", JSON.stringify(pharmacistUser));
+            localStorage.setItem("sessionStart", Date.now().toString());
+            updateCurrentUser();
+            alert("Logged in as Pharmacist");
+        }
+        
+        function loginAsLabTech() {
+            const labUser = {
+                username: "lab@example.com",
+                password: "lab123",
+                role: "Lab Technician"
+            };
+            localStorage.setItem("loggedInUser", JSON.stringify(labUser));
+            localStorage.setItem("sessionStart", Date.now().toString());
+            updateCurrentUser();
+            alert("Logged in as Lab Technician");
+        }
+        
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("sessionStart");
+            updateCurrentUser();
+            alert("Logged out");
+        }
+        
+        function testAdminAccess() {
+            window.open("/HTML/Admin/admin_dashboard.html", "_blank");
+        }
+        
+        function testReceptionistAccess() {
+            window.open("/HTML/Receptionist/receptionist_dashboard.html", "_blank");
+        }
+        
+        function testPharmacistAccess() {
+            window.open("/HTML/Pharmacist/pharmacist_dashboard.html", "_blank");
+        }
+        
+        function testLabAccess() {
+            window.open("/HTML/Lab/labhome.html", "_blank");
+        }
+        
+        // Initialize
+        updateCurrentUser();
+    </script>
+</body>
+</html> 

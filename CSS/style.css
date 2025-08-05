@@ -1,0 +1,447 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f7fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styles */
+header {
+  background-color: #003087; /* Base color */
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Reduced spacing between logo and title */
+}
+
+header .logo {
+  width: 80px;
+  height: auto;
+  object-fit: contain; /* Ensure logo scales properly */
+}
+
+header .logo-fallback {
+  background-color: #003087;
+  color: #fff;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  color: #fff;
+  background-color: #002060; /* Darker shade of base color */
+}
+
+/* Hero section */
+#hero {
+  background-color: #e6f0ff; /* Light blue complementing base color */
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+#hero h2 {
+  color: #003087; /* Base color */
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+#hero p {
+  color: #005b96; /* Secondary color */
+  font-size: 1.2rem;
+}
+
+/* Services section */
+#services {
+  padding: 2rem;
+  text-align: center;
+}
+
+#services h3 {
+  color: #003087; /* Base color */
+  margin-bottom: 1rem;
+}
+
+#services ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#services li {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #005b96; /* Secondary color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#services li:hover {
+  transform: translateY(-5px); /* Move up slightly on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+#services li img {
+  width: 120px; /* Increased size for larger radius */
+  height: 120px; /* Increased size for larger radius */
+  border-radius: 50%; /* Circular images */
+  object-fit: cover;
+  margin-bottom: 1rem; /* Space below image */
+}
+
+/* Testimonials section */
+#testimonials {
+  padding: 2rem;
+  text-align: center;
+}
+
+#testimonials h3 {
+  color: #003087; /* Base color */
+  margin-bottom: 1rem;
+}
+
+#testimonials blockquote {
+  background-color: #fff;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  border-left: 4px solid #003087; /* Base color */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+}
+
+#testimonials blockquote:hover {
+  transform: translateY(-5px); /* Move up slightly on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Contact section */
+#contact, .contact-form, .hospital-address {
+  padding: 2rem;
+}
+
+#contact h3, .contact-form h2, .hospital-address h3 {
+  color: #003087; /* Base color */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#contact p, .hospital-address p {
+  color: #005b96; /* Secondary color */
+  text-align: center;
+}
+
+/* Contact form and hospital address layout */
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-address {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.hospital-address p {
+  line-height: 2;
+}
+
+.hospital-address i {
+  color: #003087; /* Base color for icons */
+  margin-right: 0.5rem;
+}
+
+/* Contact form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+label {
+  color: #005b96; /* Secondary color */
+  font-weight: 500;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #66b0ff;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #003087; /* Base color */
+  box-shadow: 0 0 5px rgba(0, 48, 135, 0.3); /* Base color shadow */
+}
+
+button {
+  background-color: #003087; /* Base color */
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #002060; /* Darker shade of base color */
+}
+
+/* Footer styles */
+footer {
+  background-color: #003087; /* Base color */
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+footer .logo {
+  width: 80px; /* Increased size */
+  height: auto;
+  object-fit: contain; /* Ensure logo scales properly */
+  margin-bottom: 1rem;
+}
+
+footer .logo-fallback {
+  background-color: #003087;
+  color: #fff;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 auto 1rem;
+}
+
+footer .social-icons {
+  margin: 1rem 0;
+}
+
+footer .social-icons a {
+  color: #fff;
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+  color: #66b0ff; /* Lighter blue for hover */
+}
+
+footer p a {
+  color: #66b0ff;
+  text-decoration: none;
+}
+
+footer p a:hover {
+  text-decoration: underline;
+}
+
+/* About page */
+main {
+  padding: 2rem;
+}
+
+main h2, main h3 {
+  color: #003087; /* Base color */
+  margin-bottom: 1rem;
+}
+
+main p {
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+/* Doctors page */
+.department {
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.department h3 {
+  color: #003087; /* Base color */
+  text-align: center;
+}
+
+.department .doctor-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+.doctor-card {
+  display: flex;
+  flex-direction: column; /* Vertical alignment within card */
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 300px; /* Ensure cards are uniform */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px); /* Move up slightly on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.doctor-card img {
+  width: 180px; /* Increased size for larger radius */
+  height: 180px; /* Increased size for larger radius */
+  border-radius: 50%; /* Circular images */
+  object-fit: cover;
+  margin-bottom: 1rem; /* Space below image */
+}
+
+.doctor-card p {
+  color: #005b96; /* Secondary color */
+}
+
+/* Departments page */
+main section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-title {
+    margin-bottom: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  #hero h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-form, .hospital-address {
+    flex: none;
+    width: 100%;
+  }
+
+  .department .doctor-card-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  #services ul {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  header .logo, footer .logo {
+    width: 60px; /* Smaller logo on mobile */
+  }
+
+  header .logo-fallback, footer .logo-fallback {
+    width: 60px;
+    height: 60px;
+    font-size: 12px;
+  }
+
+  .department .doctor-card-container {
+    grid-template-columns: 1fr;
+  }
+}
